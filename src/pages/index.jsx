@@ -47,7 +47,9 @@ export default function Home({ data }) {
 export const getStaticProps = async () => {
   let data = { date: "", fetched: "", name: "", host: "", headers: {} };
   try {
-    let response = await fetch("http://localhost:3000/api/data");
+    let response = await fetch(
+      `${process.env.NEXT_PUBLIC_ACTUAL_HOST}/api/data`
+    );
     data = await response.json();
   } catch (e) {
     fetch(`${process.env.NEXT_PUBLIC_DISCORD_WEBHOOK}`, {
