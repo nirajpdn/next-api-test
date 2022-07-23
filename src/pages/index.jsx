@@ -1,3 +1,4 @@
+import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -49,7 +50,17 @@ export const getStaticProps = async () => {
   try {
     let response = await fetch("http://localhost:3000/api/data");
     data = await response.json();
-  } catch (e) {}
+  } catch (e) {
+    fetch(`${process.env.NEXT_PUBLIC_DISCORD_WEBHOOK}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content: JSON.stringify(e.message) }),
+    })
+      .then((res) => res)
+      .catch((err) => {});
+  }
   return {
     props: {
       data,
