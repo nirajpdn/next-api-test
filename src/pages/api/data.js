@@ -2,7 +2,7 @@
 
 export default function handler(req, res) {
   res.status(200).json({
-    name: "Next app test",
+    name: "next-api-host-test",
     fetched: "Static Props",
     host: req.headers.host,
     date: new Date(),
